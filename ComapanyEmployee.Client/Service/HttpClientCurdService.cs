@@ -35,7 +35,18 @@ namespace ComapanyEmployee.Client.Service
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var companies = JsonSerializer.Deserialize<List<CompanyDto>>(content, _options);
-            Console.WriteLine(companies.ToString());
+            var result = from c in companies
+                         select c;
+            foreach (var item in result)
+            {
+                Console.WriteLine($"{item.Id}, {item.Name}, {item.Address}, {item.Country}");
+            }
+
+
+
+
+
+
         }
     }
 }
